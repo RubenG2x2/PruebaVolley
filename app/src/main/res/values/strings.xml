@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">PruebaVolley</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="menu_Salir">Salir</string>
+    <string name="msg_Salir">¿Desea salir?</string>
+
+    <string name="tv_placeholder"> %1$s (Pos: %2$d)</string>
+
+    <string name="bt_OK">OK</string>
+    <string name="bt_KO">KO</string>
+    <string name="bt_SI">Si</string>
+    <string name="bt_NO">No</string>
+    <string name="bt_Aceptar">Aceptar</string>
+    <string name="bt_Cancelar">Cancelar</string>
+    <string name="bt_Salir">Salir</string>
+    <string name="hola_mundo">Hola mundo</string>
+    <string name="cargando">Cargando</string>
+    <string name="tab_bebida">Bebidas</string>
+    <string name="tab_menu">Menus</string>
+    <string name="tab_platos">Platos</string>
+    <string name="filtro_bebida">Bebida</string>
+    <string name="filtro_menu">Menu</string>
+    <string name="filtro_platos">Plato</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="placeHolder">DATO</string>
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="envio_comfirmado">Pedido realizado correctamente</string>
+    <string name="error_conexion">Fallo al acceder a los datos</string>
+    <string name="euro_icon">€</string>
+    <string name="btAumentar_icon">+</string>
+    <string name="btDecrementar_icon">-</string>
+    <string name="cantidad_base">1</string>
+    <string name="cantidad_minima">No se permite cantidades menores que uno</string>
+    <string name="boton_terminar_pedido">Terminar pedido</string>
+</resources>
