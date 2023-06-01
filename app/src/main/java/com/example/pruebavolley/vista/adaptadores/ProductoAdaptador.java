@@ -109,10 +109,12 @@ public class ProductoAdaptador extends RecyclerView.Adapter<ProductoAdaptador.Pr
         }
 
         private void setItem(@NonNull Producto producto){
-            byte[] imagen = Base64.decode(producto.getImage_1920(), Base64.DEFAULT);
-            Bitmap imagenBitmap = BitmapFactory.decodeByteArray(imagen, 0, imagen.length);
+            if (!producto.getImage_1920().equals("false")) {
+                byte[] imagen = Base64.decode(producto.getImage_1920(), Base64.DEFAULT);
+                Bitmap imagenBitmap = BitmapFactory.decodeByteArray(imagen, 0, imagen.length);
+                binding.imgProducto.setImageBitmap(imagenBitmap);
+            }
             binding.tvId.setText(String.valueOf(producto.getId()));
-            binding.imgProducto.setImageBitmap(imagenBitmap);
             binding.tvNombrePro.setText(producto.getName());
             binding.tvPrecioPro.setText(String.valueOf(producto.getList_price() + "€"));
 
@@ -126,11 +128,6 @@ public class ProductoAdaptador extends RecyclerView.Adapter<ProductoAdaptador.Pr
                 pedido.añadirLinea(Integer.parseInt(binding.tvId.getText().toString()),
                         Integer.parseInt(binding.etCantidad.getText().toString()),
                         Float.parseFloat(binding.tvPrecioPro.getText().toString().substring(0,binding.tvPrecioPro.getText().toString().length()-1)));
-
-
-                Gson gson = new Gson();
-                String json = gson.toJson(pedido);
-                System.out.println(json);
 
             }
         };

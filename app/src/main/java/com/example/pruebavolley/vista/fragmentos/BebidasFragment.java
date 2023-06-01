@@ -2,6 +2,7 @@ package com.example.pruebavolley.vista.fragmentos;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -18,14 +20,10 @@ import com.example.pruebavolley.R;
 import com.example.pruebavolley.databinding.FragmentTab1Binding;
 import com.example.pruebavolley.modelo.Conexion;
 import com.example.pruebavolley.modelo.Producto;
-import com.example.pruebavolley.modelo.Respuesta;
 import com.example.pruebavolley.modelo.interfaz.ConexionInterface;
 import com.example.pruebavolley.vista.adaptadores.ProductoAdaptador;
-import com.google.gson.Gson;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -34,20 +32,20 @@ import retrofit2.Response;
 
 public class BebidasFragment extends Fragment {
     private FragmentTab1Binding binding;
-    private Tab1FragInterface mCallback;
+    private tabBebidadInterface mCallback;
     private int mPos;
     private ProductoAdaptador adaptadorProductos;
     private List<Producto> listaProductos;
 
-    public interface Tab1FragInterface {
-        void onAccionTab1Frag();
+    public interface tabBebidadInterface {
+        void addLineaBebida();
     }
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if (context instanceof Tab1FragInterface) {
-            mCallback = (Tab1FragInterface) context;
+        if (context instanceof tabBebidadInterface) {
+            mCallback = (tabBebidadInterface) context;
         } else {
             throw new RuntimeException(context + " must implement Tab1FragInterface");
         }
@@ -64,7 +62,6 @@ public class BebidasFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentTab1Binding.inflate(inflater, container, false);
-
         return binding.getRoot();
     }
 
@@ -89,8 +86,6 @@ public class BebidasFragment extends Fragment {
         obtenerProductos.getProductos().enqueue(new Callback<List<Producto>>() {
             @Override
             public void onResponse(Call<List<Producto>> call, Response<List<Producto>> response) {
-
-
 
                 try {
                     for (Producto p : response.body()) {
@@ -137,7 +132,8 @@ public class BebidasFragment extends Fragment {
     private View.OnClickListener btTerminarPedidoOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Date date = new Date();
+            //Metodo que lanza el POSR
+            /*Date date = new Date();
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             adaptadorProductos.getPedido().setMesas_id(1);
 
@@ -165,7 +161,12 @@ public class BebidasFragment extends Fragment {
                 @Override
                 public void onFailure(Call<Respuesta> call, Throwable t) {
                 }
-            });
+            });*/
+
+
+
         }
     };
+
+
 }

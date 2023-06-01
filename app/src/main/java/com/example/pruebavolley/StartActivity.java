@@ -34,8 +34,8 @@ public class StartActivity extends AppCompatActivity {
         binding = ActivityStartBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         ArrayList<String> mesas_list = new ArrayList<>();
-
-        binding.spinner.setVisibility(View.VISIBLE);
+        binding.buttonNext.setVisibility(View.INVISIBLE);
+        binding.spinner.setVisibility(View.INVISIBLE);
 
         binding.buttonNext.setOnClickListener(button_next_onClickListener);
 
@@ -43,11 +43,16 @@ public class StartActivity extends AppCompatActivity {
         obtenerMesas.getMesas().enqueue(new Callback<List<Mesa>>() {
             @Override
             public void onResponse(Call<List<Mesa>> call, Response<List<Mesa>> response) {
+
                 for (Mesa mesa : response.body()) {
                     mesas_list.add(mesa.getId() + "-" +mesa.getName());
                 }
                 ArrayAdapter<String> adp = new ArrayAdapter<> (StartActivity.this,android.R.layout.simple_spinner_dropdown_item,mesas_list);
                 binding.spinner.setAdapter(adp);
+                binding.buttonNext.setVisibility(View.VISIBLE);
+                binding.spinner.setVisibility(View.VISIBLE);
+                binding.animationView.cancelAnimation();
+                binding.buttonNext.cancelAnimation();
             }
 
             @Override

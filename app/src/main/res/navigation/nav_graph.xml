@@ -2,6 +2,39 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph">
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/bebidasFragment">
 
+    <fragment
+        android:id="@+id/bebidasFragment"
+        android:name="com.example.pruebavolley.vista.fragmentos.BebidasFragment"
+        android:label="fragment_tab1"
+        tools:layout="@layout/fragment_tab1" >
+        <action
+            android:id="@+id/action_bebidasFragment_to_pedidoDetalleFragment"
+            app:destination="@id/pedidoDetalleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/menusFragment"
+        android:name="com.example.pruebavolley.vista.fragmentos.MenusFragment"
+        android:label="fragment_tab2"
+        tools:layout="@layout/fragment_tab2" >
+        <action
+            android:id="@+id/action_menusFragment_to_pedidoDetalleFragment"
+            app:destination="@id/pedidoDetalleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/platosFragment"
+        android:name="com.example.pruebavolley.vista.fragmentos.PlatosFragment"
+        android:label="fragment_tab3"
+        tools:layout="@layout/fragment_tab3" >
+        <action
+            android:id="@+id/action_platosFragment_to_pedidoDetalleFragment"
+            app:destination="@id/pedidoDetalleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pedidoDetalleFragment"
+        android:name="com.example.pruebavolley.vista.fragmentos.PedidoDetalleFragment"
+        android:label="fragment_pedido_detalle"
+        tools:layout="@layout/fragment_pedido_detalle" />
 </navigation>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/labelPro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/label_nombre_producto"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvNombrePro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/labelCantidad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="@string/label_cantidad_producto" />
+
+        <TextView
+            android:id="@+id/tvCantidadPro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/labelPrecioPro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="@string/label_precio_producto" />
+
+        <TextView
+            android:id="@+id/tvPrecioPro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="" />
+        <TextView
+            android:id="@+id/labelSubTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="@string/label_subTotal_producto" />
+
+        <TextView
+            android:id="@+id/tvSubTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btEliminarLineaProducto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_eliminar" />
+</LinearLayout>

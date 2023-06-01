@@ -4,14 +4,18 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
 import androidx.navigation.ui.AppBarConfiguration;
 
 import com.example.pruebavolley.databinding.ActivityMainBinding;
 import com.example.pruebavolley.databinding.ContentMainBinding;
+import com.example.pruebavolley.modelo.Pedido;
 import com.example.pruebavolley.vista.adaptadores.AdaptadorSwipeTabs;
 import com.example.pruebavolley.vista.fragmentos.BebidasFragment;
 import com.example.pruebavolley.vista.fragmentos.MenusFragment;
 import com.example.pruebavolley.vista.fragmentos.PlatosFragment;
+import com.example.pruebavolley.vistamodelo.ViewModel;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -20,19 +24,16 @@ import android.view.MenuItem;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
-public class MainActivity extends AppCompatActivity implements BebidasFragment.Tab1FragInterface, MenusFragment.Tab2FragInterface, PlatosFragment.Tab3FragInterface {
+public class MainActivity extends AppCompatActivity implements BebidasFragment.tabBebidadInterface, MenusFragment.Tab2FragInterface, PlatosFragment.Tab3FragInterface {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
     private ContentMainBinding bindingC;
     private int mesas_id;
+
     private AdaptadorSwipeTabs mAdaptadorST;
 
-    @Override
-    public void onAccionTab1Frag() {
-
-    }
-
+    private ViewModel vistaModeloPedido;
     @Override
     public void onAccionTab2Frag() {
 
@@ -43,18 +44,26 @@ public class MainActivity extends AppCompatActivity implements BebidasFragment.T
 
     }
 
-    interface Request {
-        @GET("/contactos")
-        Call<Odoo> getUser();
+    @Override
+    public void addLineaBebida() {
+        //TODO esto
+        if (vistaModeloPedido != null){
+
+        }
     }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.mesas_id = getIntent().getIntExtra("id_mesa",0);
+
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         bindingC = binding.contentMain;
+        vistaModeloPedido = new ViewModelProvider(this).get(ViewModel.class);
+        //Asignamos el id de la mesa
+        vistaModeloPedido.setMesaId(getIntent().getIntExtra("id_mesa",0));
 
         setSupportActionBar(binding.toolbar);
 

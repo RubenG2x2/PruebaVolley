@@ -32,6 +32,10 @@ public class Pedido {
         return date_order;
     }
 
+    public List<LineaPedido> getOrder_line() {
+        return order_line;
+    }
+
     public void setDate_order(String date_order) {
         this.date_order = date_order;
     }
@@ -40,10 +44,19 @@ public class Pedido {
         order_line.add(new LineaPedido(product_id,quantity,price_unit));
     }
 
+    public float calcularTotal(){
+        float precioTotal = 0;
+        for (LineaPedido linea :
+                this.order_line) {
+            precioTotal += linea.getSubtotal();
+        }
+        return precioTotal;
+    }
     public class LineaPedido {
         private int product_id;
         private int quantity;
         private float price_unit;
+
         public LineaPedido() {
         }
 
@@ -53,6 +66,21 @@ public class Pedido {
             this.price_unit = price_unit;
         }
 
+        public int getProduct_id() {
+            return product_id;
+        }
+
+        public int getQuantity() {
+            return quantity;
+        }
+
+        public float getPrice_unit() {
+            return price_unit;
+        }
+
+        public float getSubtotal(){
+            return quantity * price_unit;
+        }
     }
 
 }
