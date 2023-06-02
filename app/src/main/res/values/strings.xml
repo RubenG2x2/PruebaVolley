@@ -45,4 +45,12 @@
     <string name="label_precio_producto">Precio:</string>
     <string name="label_cantidad_producto">Cantidad:</string>
     <string name="label_subTotal_producto">Subtotal:</string>
+    <string name="label_detalles">Detalles</string>
+    <string name="title_activity_pedido">PedidoActivity</string>
+    <string name="msg_linea_add">Linea añadida correctamente</string>
+    <string name="lorem_ipsum">BuscarYBorrar</string>
+    <string name="op_cancelar">Cancelar</string>
+    <string name="op_aceptar">Aceptar</string>
+    <string name="confirmar_pedido">¿Desea terminar el pedido?</string>
+    <string name="pedido_vacio">El pedido se encuentra vacio</string>
 </resources>

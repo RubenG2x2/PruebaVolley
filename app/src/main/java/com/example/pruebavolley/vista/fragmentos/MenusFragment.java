@@ -2,6 +2,7 @@ package com.example.pruebavolley.vista.fragmentos;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,12 +16,13 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 
+import com.example.pruebavolley.PedidoActivity;
 import com.example.pruebavolley.R;
 import com.example.pruebavolley.databinding.FragmentTab2Binding;
 import com.example.pruebavolley.modelo.Conexion;
 import com.example.pruebavolley.modelo.Producto;
 import com.example.pruebavolley.modelo.Respuesta;
-import com.example.pruebavolley.modelo.interfaz.ConexionInterface;
+import com.example.pruebavolley.vista.interfaz.ConexionInterface;
 import com.example.pruebavolley.vista.adaptadores.ProductoAdaptador;
 import com.google.gson.Gson;
 
@@ -135,35 +137,8 @@ public class MenusFragment extends Fragment {
     private View.OnClickListener btTerminarPedidoOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Date date = new Date();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            adaptadorProductos.getPedido().setMesas_id(1);
-
-            adaptadorProductos.getPedido().setDate_order(dateFormat.format(date));
-            Gson gson = new Gson();
-            String json = gson.toJson(adaptadorProductos.getPedido());
-            System.out.println(json);
-
-            ConexionInterface pedidoService = Conexion.getConexion().getRetrofit().create(ConexionInterface.class);
-            Call<Respuesta> call = pedidoService.crearPedido(adaptadorProductos.getPedido());
-            call.enqueue(new Callback<Respuesta>() {
-                @Override
-                public void onResponse(Call<Respuesta> call, Response<Respuesta> response) {
-                    if (response.isSuccessful()) {
-                        Respuesta respuesta = response.body();
-                        if (respuesta != null) {
-                            String mensaje = respuesta.getMensaje();
-                            int idPedido = respuesta.getId();
-
-                            Toast.makeText(getContext(), mensaje + ", ID: " + idPedido, Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<Respuesta> call, Throwable t) {
-                }
-            });
+            Intent intent = new Intent(getActivity(), PedidoActivity.class);
+            startActivity(intent);
         }
     };
 }

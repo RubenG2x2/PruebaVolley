@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
 import com.example.pruebavolley.modelo.Pedido;
+import com.example.pruebavolley.modelo.Producto;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class ViewModel extends AndroidViewModel {
 
     private Pedido pedido;
     private int mesaId;
-
+    private List<Producto> productos;
     public ViewModel(@NonNull Application application) {
         super(application);
     }
@@ -36,5 +37,13 @@ public class ViewModel extends AndroidViewModel {
 
     public List<Pedido.LineaPedido> getLineasPedido(){
         return pedido.getOrder_line();
+    }
+
+    public List<Producto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
     }
 }

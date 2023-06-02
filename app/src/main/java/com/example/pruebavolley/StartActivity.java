@@ -5,14 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.example.pruebavolley.databinding.ActivityStartBinding;
 import com.example.pruebavolley.modelo.Conexion;
 import com.example.pruebavolley.modelo.Mesa;
-import com.example.pruebavolley.modelo.interfaz.ConexionInterface;
+import com.example.pruebavolley.vista.interfaz.ConexionInterface;
 
 import java.util.ArrayList;
 import java.util.List;

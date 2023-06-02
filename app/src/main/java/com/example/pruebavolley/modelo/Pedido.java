@@ -1,9 +1,14 @@
 package com.example.pruebavolley.modelo;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Pedido {
+public class Pedido  {
     private final int partner_id;
     private Integer mesas_id;
     private String date_order;
@@ -19,6 +24,8 @@ public class Pedido {
         this.order_line = orderLine;
 
     }
+
+
 
     public Integer getMesas_id() {
         return mesas_id;
@@ -52,7 +59,17 @@ public class Pedido {
         }
         return precioTotal;
     }
-    public class LineaPedido {
+
+
+    public int getPartner_id() {
+        return partner_id;
+    }
+
+    public void setOrder_line(List<LineaPedido> order_line) {
+        this.order_line = order_line;
+    }
+
+    public class LineaPedido  {
         private int product_id;
         private int quantity;
         private float price_unit;
@@ -65,6 +82,13 @@ public class Pedido {
             this.quantity = productUomQty;
             this.price_unit = price_unit;
         }
+
+        protected LineaPedido(Parcel in) {
+            product_id = in.readInt();
+            quantity = in.readInt();
+            price_unit = in.readFloat();
+        }
+
 
         public int getProduct_id() {
             return product_id;
@@ -81,6 +105,8 @@ public class Pedido {
         public float getSubtotal(){
             return quantity * price_unit;
         }
+
+
     }
 
 }

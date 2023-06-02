@@ -12,15 +12,15 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.pruebavolley.PedidoActivity;
 import com.example.pruebavolley.R;
 import com.example.pruebavolley.databinding.FragmentTab1Binding;
 import com.example.pruebavolley.modelo.Conexion;
 import com.example.pruebavolley.modelo.Producto;
-import com.example.pruebavolley.modelo.interfaz.ConexionInterface;
+import com.example.pruebavolley.vista.interfaz.ConexionInterface;
 import com.example.pruebavolley.vista.adaptadores.ProductoAdaptador;
 
 import java.util.ArrayList;
@@ -38,7 +38,9 @@ public class BebidasFragment extends Fragment {
     private List<Producto> listaProductos;
 
     public interface tabBebidadInterface {
-        void addLineaBebida();
+        List<Producto> addLineaBebida();
+
+        void consultarProducto();
     }
 
     @Override
@@ -163,7 +165,8 @@ public class BebidasFragment extends Fragment {
                 }
             });*/
 
-
+            Intent intent = new Intent(getActivity(), PedidoActivity.class);
+            startActivity(intent);
 
         }
     };

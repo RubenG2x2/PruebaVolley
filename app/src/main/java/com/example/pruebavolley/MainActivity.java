@@ -1,5 +1,6 @@
 package com.example.pruebavolley;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,18 +11,31 @@ import androidx.navigation.ui.AppBarConfiguration;
 
 import com.example.pruebavolley.databinding.ActivityMainBinding;
 import com.example.pruebavolley.databinding.ContentMainBinding;
+import com.example.pruebavolley.modelo.Conexion;
 import com.example.pruebavolley.modelo.Pedido;
+import com.example.pruebavolley.modelo.PedidoEnProceso;
+import com.example.pruebavolley.modelo.Producto;
 import com.example.pruebavolley.vista.adaptadores.AdaptadorSwipeTabs;
 import com.example.pruebavolley.vista.fragmentos.BebidasFragment;
 import com.example.pruebavolley.vista.fragmentos.MenusFragment;
 import com.example.pruebavolley.vista.fragmentos.PlatosFragment;
+import com.example.pruebavolley.vista.interfaz.ConexionInterface;
 import com.example.pruebavolley.vistamodelo.ViewModel;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import java.util.List;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.http.GET;
 
 public class MainActivity extends AppCompatActivity implements BebidasFragment.tabBebidadInterface, MenusFragment.Tab2FragInterface, PlatosFragment.Tab3FragInterface {
@@ -30,10 +44,9 @@ public class MainActivity extends AppCompatActivity implements BebidasFragment.t
     private ActivityMainBinding binding;
     private ContentMainBinding bindingC;
     private int mesas_id;
-
     private AdaptadorSwipeTabs mAdaptadorST;
-
     private ViewModel vistaModeloPedido;
+
     @Override
     public void onAccionTab2Frag() {
 
@@ -45,13 +58,34 @@ public class MainActivity extends AppCompatActivity implements BebidasFragment.t
     }
 
     @Override
-    public void addLineaBebida() {
-        //TODO esto
-        if (vistaModeloPedido != null){
+    public List<Producto> addLineaBebida() {
 
+        if (vistaModeloPedido != null){
+            return vistaModeloPedido.getProductos();
+        } else {
+            return null;
         }
     }
 
+    @Override
+    public void consultarProducto() {
+        ConexionInterface obtenerProductos = Conexion.getConexion().getRetrofit().create(ConexionInterface.class);
+        obtenerProductos.getProductos().enqueue(new Callback<List<Producto>>() {
+            @Override
+            public void onResponse(Call<List<Producto>> call, Response<List<Producto>> response) {
+                try {
+                    vistaModeloPedido.getProductos().addAll(response.body());
+
+                } catch (Exception e) {
+                }
+
+            }
+            @Override
+            public void onFailure(Call<List<Producto>> call, Throwable t) {
+                // Toast.makeText(getContext(), getText(R.string.error_conexion), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
 
     @Override
@@ -64,13 +98,15 @@ public class MainActivity extends AppCompatActivity implements BebidasFragment.t
         vistaModeloPedido = new ViewModelProvider(this).get(ViewModel.class);
         //Asignamos el id de la mesa
         vistaModeloPedido.setMesaId(getIntent().getIntExtra("id_mesa",0));
-
         setSupportActionBar(binding.toolbar);
 
-
+        PedidoEnProceso.getPedido().setMesas_id(getIntent().getIntExtra("id_mesa",0));
         //INIST
         mAdaptadorST = new AdaptadorSwipeTabs(this);
         bindingC.viewPager.setAdapter(mAdaptadorST);
+
+
+
         new TabLayoutMediator(bindingC.tabLayaout, bindingC.viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
             String[] tabNames = {
                     getString(R.string.tab_bebida),

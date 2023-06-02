@@ -1,4 +1,4 @@
-package com.example.pruebavolley.modelo.interfaz;
+package com.example.pruebavolley.vista.interfaz;
 
 import com.example.pruebavolley.modelo.Mesa;
 import com.example.pruebavolley.modelo.Pedido;

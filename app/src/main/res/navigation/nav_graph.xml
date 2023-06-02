@@ -36,5 +36,5 @@
         android:id="@+id/pedidoDetalleFragment"
         android:name="com.example.pruebavolley.vista.fragmentos.PedidoDetalleFragment"
         android:label="fragment_pedido_detalle"
-        tools:layout="@layout/fragment_pedido_detalle" />
+        tools:layout="@layout/pedido_detalle" />
 </navigation>

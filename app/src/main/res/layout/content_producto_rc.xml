@@ -65,7 +65,7 @@
 
     <Button
         android:id="@+id/btAumentar"
-        android:layout_width="45dp"
+        android:layout_width="55dp"
         android:layout_height="45dp"
         android:layout_marginBottom="1dp"
         android:text="@string/btAumentar_icon"
@@ -74,7 +74,7 @@
 
     <Button
         android:id="@+id/btDisminuir"
-        android:layout_width="45dp"
+        android:layout_width="55dp"
         android:layout_height="45dp"
         android:text="@string/btDecrementar_icon"
         app:layout_constraintBottom_toBottomOf="parent"

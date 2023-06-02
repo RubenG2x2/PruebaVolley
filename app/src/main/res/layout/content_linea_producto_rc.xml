@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
+
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -25,8 +26,8 @@
             android:id="@+id/labelCantidad"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="@string/label_cantidad_producto" />
+            android:text="@string/label_cantidad_producto"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvCantidadPro"
@@ -45,20 +46,21 @@
             android:id="@+id/labelPrecioPro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="@string/label_precio_producto" />
+            android:text="@string/label_precio_producto"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvPrecioPro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="" />
+
         <TextView
             android:id="@+id/labelSubTotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="@string/label_subTotal_producto" />
+            android:text="@string/label_subTotal_producto"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvSubTotal"
@@ -68,9 +70,22 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btEliminarLineaProducto"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_eliminar" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btEliminarLineaProducto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_eliminar" />
+
+        <TextView
+            android:id="@+id/tvIdLinea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:visibility="invisible"/>
+    </LinearLayout>
 </LinearLayout>
