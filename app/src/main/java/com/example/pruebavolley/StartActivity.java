@@ -33,7 +33,7 @@ public class StartActivity extends AppCompatActivity {
         binding = ActivityStartBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         ArrayList<String> mesas_list = new ArrayList<>();
-        binding.buttonNext.setVisibility(View.INVISIBLE);
+//        binding.buttonNext.setVisibility(View.INVISIBLE);
         binding.spinner.setVisibility(View.INVISIBLE);
 
         binding.buttonNext.setOnClickListener(button_next_onClickListener);
@@ -70,6 +70,10 @@ public class StartActivity extends AppCompatActivity {
                 intent.putExtra("id_mesa", Integer.parseInt(binding.spinner.getSelectedItem().toString().substring(0, binding.spinner.getSelectedItem().toString().indexOf('-'))));
                 startActivity(intent);
             }
+            Intent intent = new Intent(StartActivity.this, MainActivity.class);
+//                intent.putExtra("id_mesa", Integer.parseInt(binding.spinner.getSelectedItem().toString().substring(0, binding.spinner.getSelectedItem().toString().indexOf('-'))));
+            startActivity(intent);
+
         }
     };
 }

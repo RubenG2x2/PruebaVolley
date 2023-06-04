@@ -4,6 +4,7 @@ import static java.security.AccessController.getContext;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.pruebavolley.databinding.ActivityPedidoBinding;
 import com.example.pruebavolley.databinding.ContentPedidoBinding;
 import com.example.pruebavolley.modelo.Conexion;
+import com.example.pruebavolley.modelo.Pedido;
 import com.example.pruebavolley.modelo.PedidoEnProceso;
 import com.example.pruebavolley.modelo.Producto;
 import com.example.pruebavolley.modelo.Respuesta;
@@ -44,6 +46,13 @@ public class PedidoActivity extends AppCompatActivity implements DialogConfirmac
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Bundle b = getIntent().getExtras();
+        Pedido p = (Pedido) b.getParcelable("pedido");
+
+        Log.println(Log.INFO,"PEDIDO*********",p.getDate_order() + "askldjnaslk fdnaslk fjsdlkfjsadlkgsdja lkgsjgl kasjgl sjldfjl khsdf j klfdk hldfjhdflk");
+
+
 
         binding = ActivityPedidoBinding.inflate(getLayoutInflater());
         bindingC = binding.contentPedido;

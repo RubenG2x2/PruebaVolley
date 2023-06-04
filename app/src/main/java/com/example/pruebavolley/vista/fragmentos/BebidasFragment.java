@@ -19,6 +19,8 @@ import com.example.pruebavolley.PedidoActivity;
 import com.example.pruebavolley.R;
 import com.example.pruebavolley.databinding.FragmentTab1Binding;
 import com.example.pruebavolley.modelo.Conexion;
+import com.example.pruebavolley.modelo.Pedido;
+import com.example.pruebavolley.modelo.PedidoEnProceso;
 import com.example.pruebavolley.modelo.Producto;
 import com.example.pruebavolley.vista.interfaz.ConexionInterface;
 import com.example.pruebavolley.vista.adaptadores.ProductoAdaptador;
@@ -166,6 +168,9 @@ public class BebidasFragment extends Fragment {
             });*/
 
             Intent intent = new Intent(getActivity(), PedidoActivity.class);
+            Bundle b = new Bundle();
+
+            b.putParcelable("pedido",PedidoEnProceso.getPedido());
             startActivity(intent);
 
         }
