@@ -100,7 +100,7 @@ public class Pedido implements Parcelable  {
         dest.writeList(this.order_line);
     }
 
-    public  class LineaPedido  {
+    public  class LineaPedido implements Parcelable {
         private int product_id;
         private int quantity;
         private float price_unit;
@@ -114,6 +114,24 @@ public class Pedido implements Parcelable  {
             this.price_unit = price_unit;
         }
 
+
+        protected LineaPedido(Parcel in) {
+            product_id = in.readInt();
+            quantity = in.readInt();
+            price_unit = in.readFloat();
+        }
+
+        public final Creator<Pedido.LineaPedido> CREATOR = new Creator<Pedido.LineaPedido>() {
+            @Override
+            public Pedido.LineaPedido createFromParcel(Parcel in) {
+                return new Pedido.LineaPedido(in);
+            }
+
+            @Override
+            public Pedido.LineaPedido[] newArray(int size) {
+                return new Pedido.LineaPedido[size];
+            }
+        };
 
         public int getProduct_id() {
             return product_id;
@@ -132,6 +150,17 @@ public class Pedido implements Parcelable  {
         }
 
 
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(@NonNull Parcel parcel, int i) {
+            parcel.writeInt(product_id);
+            parcel.writeInt(quantity);
+            parcel.writeFloat(price_unit);
+        }
     }
 
 }

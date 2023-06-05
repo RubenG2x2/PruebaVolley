@@ -27,13 +27,10 @@ public class ProductoAdaptador extends RecyclerView.Adapter<ProductoAdaptador.Pr
 
     private List<Producto> listaProductos;
     private int posicion;
-
     private String categoriaFiltro;
-
 
     public ProductoAdaptador(List<Producto> listaProductos) {
         this.listaProductos = listaProductos;
-        this.categoriaFiltro = categoriaFiltro;
         this.posicion = -1;
 
     }
@@ -44,22 +41,6 @@ public class ProductoAdaptador extends RecyclerView.Adapter<ProductoAdaptador.Pr
 
     public void setListaProductos(List<Producto> listaProductos) {
         this.listaProductos = listaProductos;
-    }
-
-    public int getPosicion() {
-        return posicion;
-    }
-
-    public void setPosicion(int posicion) {
-        this.posicion = posicion;
-    }
-
-    public String getCategoriaFiltro() {
-        return categoriaFiltro;
-    }
-
-    public void setCategoriaFiltro(String categoriaFiltro) {
-        this.categoriaFiltro = categoriaFiltro;
     }
 
     @NonNull

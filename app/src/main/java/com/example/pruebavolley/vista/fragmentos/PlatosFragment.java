@@ -1,13 +1,11 @@
 package com.example.pruebavolley.vista.fragmentos;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,43 +13,32 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-
 import com.example.pruebavolley.PedidoActivity;
 import com.example.pruebavolley.R;
 import com.example.pruebavolley.databinding.FragmentTab3Binding;
-import com.example.pruebavolley.modelo.Conexion;
 import com.example.pruebavolley.modelo.Producto;
-import com.example.pruebavolley.modelo.Respuesta;
-import com.example.pruebavolley.vista.interfaz.ConexionInterface;
 import com.example.pruebavolley.vista.adaptadores.ProductoAdaptador;
-import com.google.gson.Gson;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class PlatosFragment extends Fragment {
 
     private FragmentTab3Binding binding;
-    private Tab3FragInterface mCallback;
+    private PlatosFragInterface mCallback;
     private int mPos;
     private ProductoAdaptador adaptadorProductos;
     private List<Producto> listaProductos;
 
-    public interface Tab3FragInterface {
-        void onAccionTab3Frag();
+    public interface PlatosFragInterface {
+        List<Producto> cargarPlatos();
     }
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if (context instanceof Tab3FragInterface) {
-            mCallback = (Tab3FragInterface) context;
+        if (context instanceof PlatosFragInterface) {
+            mCallback = (PlatosFragInterface) context;
         } else {
             throw new RuntimeException(context + " must implement Tab3FragInterface");
         }
@@ -82,34 +69,41 @@ public class PlatosFragment extends Fragment {
         binding.rcPlatos.setAdapter(adaptadorProductos);
 
         //Dialog de carga
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setView(R.layout.dialog_peticion_bd);
-        builder.setCancelable(false);
-        AlertDialog dialog = builder.create();
-        dialog.show();
+//        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+//        builder.setView(R.layout.dialog_peticion_bd);
+//        builder.setCancelable(false);
+//        AlertDialog dialog = builder.create();
+//        dialog.show();
 
-        ConexionInterface obtenerProductos = Conexion.getConexion().getRetrofit().create(ConexionInterface.class);
-        obtenerProductos.getProductos().enqueue(new Callback<List<Producto>>() {
-            @Override
-            public void onResponse(Call<List<Producto>> call, Response<List<Producto>> response) {
-                try {
-                    for (Producto p : response.body()) {
-                        if (p.getCateg_id()[1].equals(getString(R.string.filtro_platos))) {
-                            listaProductos.add(p);
-                        }
-                    }
-                    adaptadorProductos.setListaProductos(listaProductos);
-                    adaptadorProductos.notifyDataSetChanged();
-                } catch (Exception e) {
-                }
-                dialog.dismiss();
-            }
-            @Override
-            public void onFailure(Call<List<Producto>> call, Throwable t) {
-                Toast.makeText(getContext(), getText(R.string.error_conexion), Toast.LENGTH_SHORT).show();
-            }
-        });
+//        ConexionInterface obtenerProductos = Conexion.getConexion().getRetrofit().create(ConexionInterface.class);
+//        obtenerProductos.getProductos().enqueue(new Callback<List<Producto>>() {
+//            @Override
+//            public void onResponse(Call<List<Producto>> call, Response<List<Producto>> response) {
+//                try {
+//                    for (Producto p : response.body()) {
+//                        if (p.getCateg_id()[1].equals(getString(R.string.filtro_platos))) {
+//                            listaProductos.add(p);
+//                        }
+//                    }
+//                    adaptadorProductos.setListaProductos(listaProductos);
+//                    adaptadorProductos.notifyDataSetChanged();
+//                } catch (Exception e) {
+//                }
+//                dialog.dismiss();
+//            }
+//            @Override
+//            public void onFailure(Call<List<Producto>> call, Throwable t) {
+//                Toast.makeText(getContext(), getText(R.string.error_conexion), Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
+        for (Producto p : mCallback.cargarPlatos()) {
+            if (p.getCateg_id()[1].equals(getString(R.string.filtro_platos))) {
+                listaProductos.add(p);
+            }
+        }
+        adaptadorProductos.setListaProductos(listaProductos);
+        adaptadorProductos.notifyDataSetChanged();
         // Listeners
         binding.btTerminarPedido.setOnClickListener(btTerminarPedidoOnClickListener);
     }

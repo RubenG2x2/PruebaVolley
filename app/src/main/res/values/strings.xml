@@ -53,4 +53,6 @@
     <string name="op_aceptar">Aceptar</string>
     <string name="confirmar_pedido">¿Desea terminar el pedido?</string>
     <string name="pedido_vacio">El pedido se encuentra vacio</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

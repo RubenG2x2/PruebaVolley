@@ -2,6 +2,7 @@ package com.example.pruebavolley;
 
 import static java.security.AccessController.getContext;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.util.Log;
@@ -46,12 +47,6 @@ public class PedidoActivity extends AppCompatActivity implements DialogConfirmac
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        Bundle b = getIntent().getExtras();
-        Pedido p = (Pedido) b.getParcelable("pedido");
-
-        Log.println(Log.INFO,"PEDIDO*********",p.getDate_order() + "askldjnaslk fdnaslk fjsdlkfjsadlkgsdja lkgsjgl kasjgl sjldfjl khsdf j klfdk hldfjhdflk");
-
 
 
         binding = ActivityPedidoBinding.inflate(getLayoutInflater());
@@ -101,11 +96,15 @@ public class PedidoActivity extends AppCompatActivity implements DialogConfirmac
         }
     };
     private void mostrarDialog(){
-        DialogConfirmacion dialog = new DialogConfirmacion();
-        dialog.setTitulo(R.string.app_name);
-        dialog.setMensaje(R.string.confirmar_pedido);
-        dialog.setCancelable(false);
-        dialog.show(getSupportFragmentManager(),tagConfirmacion);
+        if (PedidoEnProceso.getPedido().getOrder_line().size()!= 0) {
+            DialogConfirmacion dialog = new DialogConfirmacion();
+            dialog.setTitulo(R.string.app_name);
+            dialog.setMensaje(R.string.confirmar_pedido);
+            dialog.setCancelable(false);
+            dialog.show(getSupportFragmentManager(), tagConfirmacion);
+        } else {
+            Toast.makeText(getApplicationContext(), R.string.pedido_vacio, Toast.LENGTH_SHORT).show();
+        }
     }
     @Override
     public void onDlgConfirmacionPositiveClick(DialogFragment dialog) {
@@ -143,6 +142,13 @@ public class PedidoActivity extends AppCompatActivity implements DialogConfirmac
     @Override
     public void onDlgConfirmacionNegativeClick(DialogFragment dialog) {
 
+    }
+    public void actualizarTotalPedido() {
+        double total = 0.0;
+        for (Pedido.LineaPedido lineaPedido : PedidoEnProceso.getPedido().getOrder_line()) {
+            total += lineaPedido.getSubtotal();
+        }
+        bindingC.tvTotal.setText(String.valueOf(total));
     }
 
 }

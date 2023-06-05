@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -40,9 +41,7 @@ public class BebidasFragment extends Fragment {
     private List<Producto> listaProductos;
 
     public interface tabBebidadInterface {
-        List<Producto> addLineaBebida();
-
-        void consultarProducto();
+        void cargarProductos(List<Producto> productos);
     }
 
     @Override
@@ -86,6 +85,7 @@ public class BebidasFragment extends Fragment {
         AlertDialog dialog = builder.create();
         dialog.show();
 
+
         ConexionInterface obtenerProductos = Conexion.getConexion().getRetrofit().create(ConexionInterface.class);
         obtenerProductos.getProductos().enqueue(new Callback<List<Producto>>() {
             @Override
@@ -97,6 +97,7 @@ public class BebidasFragment extends Fragment {
                             listaProductos.add(p);
                         }
                     }
+                    mCallback.cargarProductos(response.body());
                     adaptadorProductos.setListaProductos(listaProductos);
                     adaptadorProductos.notifyDataSetChanged();
                 } catch (Exception e) {
@@ -136,43 +137,9 @@ public class BebidasFragment extends Fragment {
     private View.OnClickListener btTerminarPedidoOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            //Metodo que lanza el POSR
-            /*Date date = new Date();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            adaptadorProductos.getPedido().setMesas_id(1);
-
-            adaptadorProductos.getPedido().setDate_order(dateFormat.format(date));
-            Gson gson = new Gson();
-            String json = gson.toJson(adaptadorProductos.getPedido());
-            System.out.println(json);
-
-            ConexionInterface pedidoService = Conexion.getConexion().getRetrofit().create(ConexionInterface.class);
-            Call<Respuesta> call = pedidoService.crearPedido(adaptadorProductos.getPedido());
-            call.enqueue(new Callback<Respuesta>() {
-                @Override
-                public void onResponse(Call<Respuesta> call, Response<Respuesta> response) {
-                    if (response.isSuccessful()) {
-                        Respuesta respuesta = response.body();
-                        if (respuesta != null) {
-                            String mensaje = respuesta.getMensaje();
-                            int idPedido = respuesta.getId();
-
-                            Toast.makeText(getContext(), mensaje + ", ID: " + idPedido, Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<Respuesta> call, Throwable t) {
-                }
-            });*/
-
             Intent intent = new Intent(getActivity(), PedidoActivity.class);
-            Bundle b = new Bundle();
-
-            b.putParcelable("pedido",PedidoEnProceso.getPedido());
+            intent.putExtra("Pedido",PedidoEnProceso.getPedido());
             startActivity(intent);
-
         }
     };
 

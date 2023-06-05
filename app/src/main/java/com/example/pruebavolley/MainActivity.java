@@ -1,44 +1,30 @@
 package com.example.pruebavolley;
 
-import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
 import androidx.navigation.ui.AppBarConfiguration;
 
 import com.example.pruebavolley.databinding.ActivityMainBinding;
 import com.example.pruebavolley.databinding.ContentMainBinding;
-import com.example.pruebavolley.modelo.Conexion;
-import com.example.pruebavolley.modelo.Pedido;
 import com.example.pruebavolley.modelo.PedidoEnProceso;
 import com.example.pruebavolley.modelo.Producto;
 import com.example.pruebavolley.vista.adaptadores.AdaptadorSwipeTabs;
 import com.example.pruebavolley.vista.fragmentos.BebidasFragment;
 import com.example.pruebavolley.vista.fragmentos.MenusFragment;
 import com.example.pruebavolley.vista.fragmentos.PlatosFragment;
-import com.example.pruebavolley.vista.interfaz.ConexionInterface;
 import com.example.pruebavolley.vistamodelo.ViewModel;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import java.util.List;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.http.GET;
-
-public class MainActivity extends AppCompatActivity implements BebidasFragment.tabBebidadInterface, MenusFragment.Tab2FragInterface, PlatosFragment.Tab3FragInterface {
+public class MainActivity extends AppCompatActivity implements BebidasFragment.tabBebidadInterface, MenusFragment.MenuFragInterface, PlatosFragment.PlatosFragInterface {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
@@ -46,47 +32,7 @@ public class MainActivity extends AppCompatActivity implements BebidasFragment.t
     private int mesas_id;
     private AdaptadorSwipeTabs mAdaptadorST;
     private ViewModel vistaModeloPedido;
-
-    @Override
-    public void onAccionTab2Frag() {
-
-    }
-
-    @Override
-    public void onAccionTab3Frag() {
-
-    }
-
-    @Override
-    public List<Producto> addLineaBebida() {
-
-        if (vistaModeloPedido != null){
-            return vistaModeloPedido.getProductos();
-        } else {
-            return null;
-        }
-    }
-
-    @Override
-    public void consultarProducto() {
-        ConexionInterface obtenerProductos = Conexion.getConexion().getRetrofit().create(ConexionInterface.class);
-        obtenerProductos.getProductos().enqueue(new Callback<List<Producto>>() {
-            @Override
-            public void onResponse(Call<List<Producto>> call, Response<List<Producto>> response) {
-                try {
-                    vistaModeloPedido.getProductos().addAll(response.body());
-
-                } catch (Exception e) {
-                }
-
-            }
-            @Override
-            public void onFailure(Call<List<Producto>> call, Throwable t) {
-                // Toast.makeText(getContext(), getText(R.string.error_conexion), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
+    private List<Producto> productos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,5 +104,20 @@ public class MainActivity extends AppCompatActivity implements BebidasFragment.t
 
     public void setMesas_id(int mesas_id) {
         this.mesas_id = mesas_id;
+    }
+
+    @Override
+    public void cargarProductos(List<Producto> productos) {
+        this.productos = productos;
+    }
+
+    @Override
+    public List<Producto> cargarPlatos() {
+        return this.productos;
+    }
+
+    @Override
+    public List<Producto> cargarMenus() {
+        return this.productos;
     }
 }

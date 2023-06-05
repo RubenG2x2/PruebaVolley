@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.pruebavolley.PedidoActivity;
 import com.example.pruebavolley.R;
 import com.example.pruebavolley.databinding.ContentLineaProductoRcBinding;
 import com.example.pruebavolley.modelo.Conexion;
@@ -96,6 +97,7 @@ public class LineaProductoAdaptador extends RecyclerView.Adapter<LineaProductoAd
                     if (l.getProduct_id() == Integer.parseInt(binding.tvIdLinea.getText().toString()) && l.getQuantity() == Integer.parseInt(binding.tvCantidadPro.getText().toString())){
                         PedidoEnProceso.getPedido().getOrder_line().remove(l);
                         notifyDataSetChanged();
+                        ((PedidoActivity) itemView.getContext()).actualizarTotalPedido();
                         return;
                     }
                 }
