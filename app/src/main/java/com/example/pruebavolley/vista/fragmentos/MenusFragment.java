@@ -33,7 +33,12 @@ public class MenusFragment extends Fragment {
     public interface MenuFragInterface {
         List<Producto> cargarMenus();
     }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        adaptadorProductos.setReiniciarCantidades(1);
+        adaptadorProductos.notifyDataSetChanged();
+    }
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);

@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements BebidasFragment.t
         vistaModeloPedido.setMesaId(getIntent().getIntExtra("id_mesa",0));
         setSupportActionBar(binding.toolbar);
 
-        PedidoEnProceso.getPedido().setMesas_id(getIntent().getIntExtra("id_mesa",0));
+        PedidoEnProceso.limpiarPedido(getIntent().getIntExtra("id_mesa",0));
         //INIST
         mAdaptadorST = new AdaptadorSwipeTabs(this);
         bindingC.viewPager.setAdapter(mAdaptadorST);

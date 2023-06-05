@@ -45,6 +45,13 @@ public class PlatosFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        adaptadorProductos.setReiniciarCantidades(1);
+        adaptadorProductos.notifyDataSetChanged();
+    }
+
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {

@@ -1,6 +1,5 @@
 package com.example.pruebavolley.vista.adaptadores;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -15,29 +14,24 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pruebavolley.R;
 import com.example.pruebavolley.databinding.ContentProductoRcBinding;
-import com.example.pruebavolley.modelo.Pedido;
 import com.example.pruebavolley.modelo.PedidoEnProceso;
 import com.example.pruebavolley.modelo.Producto;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.gson.Gson;
 
 import java.util.List;
 
-public class ProductoAdaptador extends RecyclerView.Adapter<ProductoAdaptador.ProductoVh>{
+public class ProductoAdaptador extends RecyclerView.Adapter<ProductoAdaptador.ProductoVh> {
 
     private List<Producto> listaProductos;
     private int posicion;
-    private String categoriaFiltro;
+    private int reiniciarCantidades;
 
     public ProductoAdaptador(List<Producto> listaProductos) {
         this.listaProductos = listaProductos;
         this.posicion = -1;
-
+        this.reiniciarCantidades = 0;
     }
 
-    public List<Producto> getListaProductos() {
-        return listaProductos;
-    }
 
     public void setListaProductos(List<Producto> listaProductos) {
         this.listaProductos = listaProductos;
@@ -46,16 +40,18 @@ public class ProductoAdaptador extends RecyclerView.Adapter<ProductoAdaptador.Pr
     @NonNull
     @Override
     public ProductoVh onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.content_producto_rc,parent,false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.content_producto_rc, parent, false);
         return new ProductoVh(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ProductoVh holder, int position) {
         holder.setItem(listaProductos.get(position));
-        holder.itemView.setBackgroundColor((posicion == position)
-                ? ContextCompat.getColor(holder.itemView.getContext(), R.color.purple_200)
-                : Color.TRANSPARENT);
+    }
+
+
+    public void setReiniciarCantidades(int reiniciarCantidades) {
+        this.reiniciarCantidades = reiniciarCantidades;
     }
 
     @Override
@@ -63,28 +59,19 @@ public class ProductoAdaptador extends RecyclerView.Adapter<ProductoAdaptador.Pr
         return listaProductos.size();
     }
 
-    public class ProductoVh extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ProductoVh extends RecyclerView.ViewHolder  {
 
         private final ContentProductoRcBinding binding;
+
         public ProductoVh(@NonNull View itemView) {
             super(itemView);
             binding = ContentProductoRcBinding.bind(itemView);
             binding.iconCarro.setOnClickListener(iconCarritoOnClickListener);
             binding.btAumentar.setOnClickListener(btAumentarOnCLickListener);
             binding.btDisminuir.setOnClickListener(btDisminuirOnCLickListener);
-
-            itemView.setOnClickListener(this);
         }
 
-        @Override
-        public void onClick(View view) {
-            int pos = getLayoutPosition();
-            notifyItemChanged(posicion);
-            posicion = (posicion == pos) ? -1 : pos;
-            notifyItemChanged(posicion);
-        }
-
-        private void setItem(@NonNull Producto producto){
+        private void setItem(@NonNull Producto producto) {
             if (!producto.getImage_1920().equals("false")) {
                 byte[] imagen = Base64.decode(producto.getImage_1920(), Base64.DEFAULT);
                 Bitmap imagenBitmap = BitmapFactory.decodeByteArray(imagen, 0, imagen.length);
@@ -93,17 +80,20 @@ public class ProductoAdaptador extends RecyclerView.Adapter<ProductoAdaptador.Pr
             binding.tvId.setText(String.valueOf(producto.getId()));
             binding.tvNombrePro.setText(producto.getName());
             binding.tvPrecioPro.setText(String.valueOf(producto.getList_price() + "€"));
-
+            if (reiniciarCantidades > 0) {
+                binding.etCantidad.setText("1");
+            }
         }
+
 
         private View.OnClickListener iconCarritoOnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(binding.getRoot(),"Producto añadido",Snackbar.LENGTH_LONG).show();
+                Snackbar.make(binding.getRoot(), "Producto añadido", Snackbar.LENGTH_LONG).show();
 
                 PedidoEnProceso.getPedido().añadirLinea(Integer.parseInt(binding.tvId.getText().toString()),
                         Integer.parseInt(binding.etCantidad.getText().toString()),
-                        Float.parseFloat(binding.tvPrecioPro.getText().toString().substring(0,binding.tvPrecioPro.getText().toString().length()-1)));
+                        Float.parseFloat(binding.tvPrecioPro.getText().toString().substring(0, binding.tvPrecioPro.getText().toString().length() - 1)));
 
                 PedidoEnProceso.getPedido();
             }
@@ -119,8 +109,8 @@ public class ProductoAdaptador extends RecyclerView.Adapter<ProductoAdaptador.Pr
             @Override
             public void onClick(View view) {
                 int cantidadModificada = Integer.valueOf(binding.etCantidad.getText().toString()) - 1;
-                if (cantidadModificada < 1){
-                    Snackbar.make(binding.getRoot(), R.string.cantidad_minima,Snackbar.LENGTH_SHORT).show();
+                if (cantidadModificada < 1) {
+                    Snackbar.make(binding.getRoot(), R.string.cantidad_minima, Snackbar.LENGTH_SHORT).show();
                 } else {
                     binding.etCantidad.setText(String.valueOf(cantidadModificada));
                 }

@@ -26,9 +26,6 @@ import retrofit2.Response;
 
 public class LineaProductoAdaptador extends RecyclerView.Adapter<LineaProductoAdaptador.LineaVh> {
 
-
-
-
     private int posicion;
 
     private List<Producto> productos;
@@ -54,6 +51,7 @@ public class LineaProductoAdaptador extends RecyclerView.Adapter<LineaProductoAd
                 ? ContextCompat.getColor(holder.itemView.getContext(), R.color.purple_200)
                 : Color.TRANSPARENT);
     }
+
 
     @Override
     public int getItemCount() {

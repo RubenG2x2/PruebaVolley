@@ -43,7 +43,12 @@ public class BebidasFragment extends Fragment {
     public interface tabBebidadInterface {
         void cargarProductos(List<Producto> productos);
     }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        adaptadorProductos.setReiniciarCantidades(1);
+        adaptadorProductos.notifyDataSetChanged();
+    }
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);

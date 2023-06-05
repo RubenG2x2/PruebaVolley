@@ -10,6 +10,7 @@ public class PedidoEnProceso {
         }
         return pedido;
     }
+
     public static void limpiarPedido(int mesas_id){
         pedido = new Pedido();
         pedido.setMesas_id(mesas_id);

@@ -97,11 +97,13 @@ public class PedidoActivity extends AppCompatActivity implements DialogConfirmac
     };
     private void mostrarDialog(){
         if (PedidoEnProceso.getPedido().getOrder_line().size()!= 0) {
+
             DialogConfirmacion dialog = new DialogConfirmacion();
             dialog.setTitulo(R.string.app_name);
             dialog.setMensaje(R.string.confirmar_pedido);
             dialog.setCancelable(false);
             dialog.show(getSupportFragmentManager(), tagConfirmacion);
+            bindingC.btEnviarrPedido.setEnabled(false);
         } else {
             Toast.makeText(getApplicationContext(), R.string.pedido_vacio, Toast.LENGTH_SHORT).show();
         }
@@ -134,6 +136,7 @@ public class PedidoActivity extends AppCompatActivity implements DialogConfirmac
 
             @Override
             public void onFailure(Call<Respuesta> call, Throwable t) {
+                bindingC.btEnviarrPedido.setEnabled(true);
             }
         });
 
@@ -141,7 +144,7 @@ public class PedidoActivity extends AppCompatActivity implements DialogConfirmac
 
     @Override
     public void onDlgConfirmacionNegativeClick(DialogFragment dialog) {
-
+        bindingC.btEnviarrPedido.setEnabled(true);
     }
     public void actualizarTotalPedido() {
         double total = 0.0;
