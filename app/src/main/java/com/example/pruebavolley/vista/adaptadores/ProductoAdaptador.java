@@ -95,7 +95,7 @@ public class ProductoAdaptador extends RecyclerView.Adapter<ProductoAdaptador.Pr
                         Integer.parseInt(binding.etCantidad.getText().toString()),
                         Float.parseFloat(binding.tvPrecioPro.getText().toString().substring(0, binding.tvPrecioPro.getText().toString().length() - 1)));
 
-                PedidoEnProceso.getPedido();
+                binding.iconCarro.playAnimation();
             }
         };
         private View.OnClickListener btAumentarOnCLickListener = new View.OnClickListener() {
