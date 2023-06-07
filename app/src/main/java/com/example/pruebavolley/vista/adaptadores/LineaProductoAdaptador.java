@@ -17,6 +17,7 @@ import com.example.pruebavolley.modelo.Pedido;
 import com.example.pruebavolley.modelo.PedidoEnProceso;
 import com.example.pruebavolley.modelo.Producto;
 import com.example.pruebavolley.vista.interfaz.ConexionInterface;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -91,12 +92,19 @@ public class LineaProductoAdaptador extends RecyclerView.Adapter<LineaProductoAd
                 @Override
                 public void onClick(View v) {
                     lineaPedido.setQuantity(lineaPedido.getQuantity() +1);
+                    notifyDataSetChanged();
                 }
             });
             binding.btDisminuirCantidad.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    lineaPedido.setQuantity(lineaPedido.getQuantity() -1);
+                    if (lineaPedido.getQuantity()> 1) {
+                        lineaPedido.setQuantity(lineaPedido.getQuantity() - 1);
+                        notifyDataSetChanged();
+                    } else {
+
+                        Snackbar.make(binding.getRoot(), R.string.cantidad_minima_linea, Snackbar.LENGTH_LONG).show();
+                    }
                 }
             });
 
