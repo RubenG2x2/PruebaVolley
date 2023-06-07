@@ -31,10 +31,8 @@ public class LineaProductoAdaptador extends RecyclerView.Adapter<LineaProductoAd
     private List<Producto> productos;
 
     public LineaProductoAdaptador(Pedido pedido,List<Producto> productos) {
-
         posicion = -1;
         this.productos = productos;
-
     }
 
     @NonNull
@@ -81,12 +79,27 @@ public class LineaProductoAdaptador extends RecyclerView.Adapter<LineaProductoAd
             binding.tvSubTotal.setText(String.valueOf(lineaPedido.getSubtotal()));
             binding.tvPrecioPro.setText(String.valueOf(lineaPedido.getPrice_unit()));
             binding.tvCantidadPro.setText(String.valueOf(lineaPedido.getQuantity()));
+
             for (Producto p : productos) {
                 if (p.getId() == lineaPedido.getProduct_id()){
                     binding.tvNombrePro.setText(p.getName());
                 }
             }
             binding.tvIdLinea.setText(String.valueOf(lineaPedido.getProduct_id()));
+
+            binding.btAumentarCantidad.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    lineaPedido.setQuantity(lineaPedido.getQuantity() +1);
+                }
+            });
+            binding.btDisminuirCantidad.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    lineaPedido.setQuantity(lineaPedido.getQuantity() -1);
+                }
+            });
+
         }
         private View.OnClickListener btEliminarLineaProductoOnClickListener = new View.OnClickListener() {
             @Override
