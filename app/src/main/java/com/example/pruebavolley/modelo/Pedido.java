@@ -105,6 +105,14 @@ public class Pedido implements Parcelable  {
         private int quantity;
         private float price_unit;
 
+        public void setQuantity(int quantity) {
+            this.quantity = quantity;
+        }
+
+        public void setPrice_unit(float price_unit) {
+            this.price_unit = price_unit;
+        }
+
         public LineaPedido() {
         }
 
