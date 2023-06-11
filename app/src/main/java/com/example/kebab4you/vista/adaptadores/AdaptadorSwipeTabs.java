@@ -1,4 +1,4 @@
-package com.example.pruebavolley.vista.adaptadores;
+package com.example.kebab4you.vista.adaptadores;
 
 import android.os.Bundle;
 
@@ -7,9 +7,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.pruebavolley.vista.fragmentos.BebidasFragment;
-import com.example.pruebavolley.vista.fragmentos.MenusFragment;
-import com.example.pruebavolley.vista.fragmentos.PlatosFragment;
+import com.example.kebab4you.vista.fragmentos.BebidasFragment;
+import com.example.kebab4you.vista.fragmentos.MenusFragment;
+import com.example.kebab4you.vista.fragmentos.PlatosFragment;
 
 
 public class AdaptadorSwipeTabs extends FragmentStateAdapter {

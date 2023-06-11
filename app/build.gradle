@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.pruebavolley'
+    namespace 'com.example.kebab4You'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.pruebavolley"
+        applicationId "com.example.kebab4You"
         minSdk 24
         targetSdk 33
         versionCode 1

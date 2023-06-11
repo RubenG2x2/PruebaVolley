@@ -1,4 +1,4 @@
-package com.example.pruebavolley.modelo;
+package com.example.kebab4you.modelo;
 
 import android.os.Parcel;
 import android.os.Parcelable;

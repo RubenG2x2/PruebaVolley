@@ -1,21 +1,19 @@
-package com.example.pruebavolley.vista.adaptadores;
+package com.example.kebab4you.vista.adaptadores;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.pruebavolley.R;
-import com.example.pruebavolley.databinding.ContentProductoRcBinding;
-import com.example.pruebavolley.modelo.PedidoEnProceso;
-import com.example.pruebavolley.modelo.Producto;
+import com.example.kebab4You.R;
+import com.example.kebab4You.databinding.ContentProductoRcBinding;
+import com.example.kebab4you.modelo.PedidoEnProceso;
+import com.example.kebab4you.modelo.Producto;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;

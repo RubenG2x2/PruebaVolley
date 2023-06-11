@@ -1,4 +1,4 @@
-package com.example.pruebavolley.vista.fragmentos;
+package com.example.kebab4you.vista.fragmentos;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -12,19 +12,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.pruebavolley.PedidoActivity;
-import com.example.pruebavolley.R;
-import com.example.pruebavolley.databinding.FragmentTab1Binding;
-import com.example.pruebavolley.modelo.Conexion;
-import com.example.pruebavolley.modelo.Pedido;
-import com.example.pruebavolley.modelo.PedidoEnProceso;
-import com.example.pruebavolley.modelo.Producto;
-import com.example.pruebavolley.vista.interfaz.ConexionInterface;
-import com.example.pruebavolley.vista.adaptadores.ProductoAdaptador;
+import com.example.kebab4You.R;
+import com.example.kebab4You.databinding.FragmentTab1Binding;
+import com.example.kebab4you.PedidoActivity;
+import com.example.kebab4you.modelo.Conexion;
+import com.example.kebab4you.modelo.Producto;
+import com.example.kebab4you.vista.interfaz.ConexionInterface;
+import com.example.kebab4you.vista.adaptadores.ProductoAdaptador;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -143,7 +140,7 @@ public class BebidasFragment extends Fragment {
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(getActivity(), PedidoActivity.class);
-            intent.putExtra("Pedido",PedidoEnProceso.getPedido());
+
             startActivity(intent);
         }
     };

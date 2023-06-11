@@ -1,4 +1,4 @@
-package com.example.pruebavolley.vista.dialogos;
+package com.example.kebab4you.vista.dialogos;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -9,7 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
-import com.example.pruebavolley.R;
+import com.example.kebab4You.R;
+
 
 public class DialogConfirmacion extends DialogFragment{
     private int textTitulo;

@@ -1,4 +1,4 @@
-package com.example.pruebavolley.modelo;
+package com.example.kebab4you.modelo;
 
 public class Producto {
     private int id;

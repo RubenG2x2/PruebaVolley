@@ -1,4 +1,4 @@
-package com.example.pruebavolley.modelo;
+package com.example.kebab4you.modelo;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

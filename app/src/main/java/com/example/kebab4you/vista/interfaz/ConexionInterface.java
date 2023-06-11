@@ -1,9 +1,9 @@
-package com.example.pruebavolley.vista.interfaz;
+package com.example.kebab4you.vista.interfaz;
 
-import com.example.pruebavolley.modelo.Mesa;
-import com.example.pruebavolley.modelo.Pedido;
-import com.example.pruebavolley.modelo.Producto;
-import com.example.pruebavolley.modelo.Respuesta;
+import com.example.kebab4you.modelo.Mesa;
+import com.example.kebab4you.modelo.Pedido;
+import com.example.kebab4you.modelo.Producto;
+import com.example.kebab4you.modelo.Respuesta;
 
 import java.util.List;
 

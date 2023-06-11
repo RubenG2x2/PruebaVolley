@@ -1,4 +1,4 @@
-package com.example.pruebavolley.modelo;
+package com.example.kebab4you.modelo;
 
 public class Respuesta {
     private String mensaje;

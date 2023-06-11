@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/bebidasFragment"
-        android:name="com.example.pruebavolley.vista.fragmentos.BebidasFragment"
+        android:name="com.example.kebab4you.vista.fragmentos.BebidasFragment"
         android:label="fragment_tab1"
         tools:layout="@layout/fragment_tab1" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/menusFragment"
-        android:name="com.example.pruebavolley.vista.fragmentos.MenusFragment"
+        android:name="com.example.kebab4you.vista.fragmentos.MenusFragment"
         android:label="fragment_tab2"
         tools:layout="@layout/fragment_tab2" >
         <action
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/platosFragment"
-        android:name="com.example.pruebavolley.vista.fragmentos.PlatosFragment"
+        android:name="com.example.kebab4you.vista.fragmentos.PlatosFragment"
         android:label="fragment_tab3"
         tools:layout="@layout/fragment_tab3" >
         <action
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/pedidoDetalleFragment"
-        android:name="com.example.pruebavolley.vista.fragmentos.PedidoDetalleFragment"
+        android:name="com.example.kebab4you.vista.fragmentos.PedidoDetalleFragment"
         android:label="fragment_pedido_detalle"
         tools:layout="@layout/pedido_detalle" />
 </navigation>

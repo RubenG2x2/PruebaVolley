@@ -1,4 +1,4 @@
-package com.example.pruebavolley.vista.adaptadores;
+package com.example.kebab4you.vista.adaptadores;
 
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -9,21 +9,15 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.pruebavolley.PedidoActivity;
-import com.example.pruebavolley.R;
-import com.example.pruebavolley.databinding.ContentLineaProductoRcBinding;
-import com.example.pruebavolley.modelo.Conexion;
-import com.example.pruebavolley.modelo.Pedido;
-import com.example.pruebavolley.modelo.PedidoEnProceso;
-import com.example.pruebavolley.modelo.Producto;
-import com.example.pruebavolley.vista.interfaz.ConexionInterface;
+import com.example.kebab4You.R;
+import com.example.kebab4You.databinding.ContentLineaProductoRcBinding;
+import com.example.kebab4you.PedidoActivity;
+import com.example.kebab4you.modelo.Pedido;
+import com.example.kebab4you.modelo.PedidoEnProceso;
+import com.example.kebab4you.modelo.Producto;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class LineaProductoAdaptador extends RecyclerView.Adapter<LineaProductoAdaptador.LineaVh> {
 
@@ -47,7 +41,7 @@ public class LineaProductoAdaptador extends RecyclerView.Adapter<LineaProductoAd
     public void onBindViewHolder(@NonNull LineaVh holder, int position) {
         holder.setItem(PedidoEnProceso.getPedido().getOrder_line().get(position));
         holder.itemView.setBackgroundColor((posicion == position)
-                ? ContextCompat.getColor(holder.itemView.getContext(), R.color.purple_200)
+                ? ContextCompat.getColor(holder.itemView.getContext(), R.color.teal_200)
                 : Color.TRANSPARENT);
     }
 
@@ -103,7 +97,7 @@ public class LineaProductoAdaptador extends RecyclerView.Adapter<LineaProductoAd
                         notifyDataSetChanged();
                     } else {
 
-                        Snackbar.make(binding.getRoot(), R.string.cantidad_minima_linea, Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(binding.getRoot(), R.string.cantidad_min_linea, Snackbar.LENGTH_LONG).show();
                     }
                 }
             });

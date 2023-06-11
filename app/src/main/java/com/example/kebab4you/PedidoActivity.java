@@ -1,11 +1,7 @@
-package com.example.pruebavolley;
+package com.example.kebab4you;
 
-import static java.security.AccessController.getContext;
-
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -15,17 +11,19 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.pruebavolley.databinding.ActivityPedidoBinding;
-import com.example.pruebavolley.databinding.ContentPedidoBinding;
-import com.example.pruebavolley.modelo.Conexion;
-import com.example.pruebavolley.modelo.Pedido;
-import com.example.pruebavolley.modelo.PedidoEnProceso;
-import com.example.pruebavolley.modelo.Producto;
-import com.example.pruebavolley.modelo.Respuesta;
-import com.example.pruebavolley.vista.adaptadores.LineaProductoAdaptador;
-import com.example.pruebavolley.vista.dialogos.DialogConfirmacion;
-import com.example.pruebavolley.vista.interfaz.ConexionInterface;
+import com.example.kebab4You.R;
+import com.example.kebab4You.databinding.ActivityPedidoBinding;
+import com.example.kebab4You.databinding.ContentPedidoBinding;
+import com.example.kebab4you.modelo.Conexion;
+import com.example.kebab4you.modelo.Pedido;
+import com.example.kebab4you.modelo.PedidoEnProceso;
+import com.example.kebab4you.modelo.Producto;
+import com.example.kebab4you.modelo.Respuesta;
+import com.example.kebab4you.vista.adaptadores.LineaProductoAdaptador;
+import com.example.kebab4you.vista.dialogos.DialogConfirmacion;
+import com.example.kebab4you.vista.interfaz.ConexionInterface;
 
+import java.net.SocketTimeoutException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -52,7 +50,7 @@ public class PedidoActivity extends AppCompatActivity implements DialogConfirmac
         binding = ActivityPedidoBinding.inflate(getLayoutInflater());
         bindingC = binding.contentPedido;
         setContentView(binding.getRoot());
-        setSupportActionBar(binding.toolbar);
+        //setSupportActionBar(binding.toolbar);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(R.layout.dialog_peticion_bd);
@@ -117,8 +115,11 @@ public class PedidoActivity extends AppCompatActivity implements DialogConfirmac
 
         PedidoEnProceso.getPedido().setDate_order(dateFormat.format(date));
 
+        Pedido p = PedidoEnProceso.getPedido();
+        p.getOrder_line();
         ConexionInterface pedidoService = Conexion.getConexion().getRetrofit().create(ConexionInterface.class);
         Call<Respuesta> call = pedidoService.crearPedido(PedidoEnProceso.getPedido());
+        
         call.enqueue(new Callback<Respuesta>() {
             @Override
             public void onResponse(Call<Respuesta> call, Response<Respuesta> response) {
@@ -136,6 +137,11 @@ public class PedidoActivity extends AppCompatActivity implements DialogConfirmac
 
             @Override
             public void onFailure(Call<Respuesta> call, Throwable t) {
+                if (t instanceof SocketTimeoutException) {
+                    Toast.makeText(getApplicationContext(), getString(R.string.pedido_realizado), Toast.LENGTH_SHORT).show();
+                    PedidoEnProceso.limpiarPedido(mesaId);
+                    finish();
+                }
                 bindingC.btEnviarrPedido.setEnabled(true);
             }
         });

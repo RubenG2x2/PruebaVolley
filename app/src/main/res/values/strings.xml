@@ -53,5 +53,6 @@
     <string name="op_aceptar">Aceptar</string>
     <string name="confirmar_pedido">¿Desea terminar el pedido?</string>
     <string name="pedido_vacio">El pedido se encuentra vacio</string>
-    <string name="cantidad_minima_linea">Use el boton eliminar para borrar el producto</string>
+    <string name="cantidad_min_linea">Use el boton eliminar para borrar el producto</string>
+    <string name="pedido_realizado">El pedido se creo correctamente</string>
 </resources>

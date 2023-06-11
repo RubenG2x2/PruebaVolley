@@ -1,12 +1,12 @@
-package com.example.pruebavolley.vistamodelo;
+package com.example.kebab4you.vistamodelo;
 
 import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
-import com.example.pruebavolley.modelo.Pedido;
-import com.example.pruebavolley.modelo.Producto;
+import com.example.kebab4you.modelo.Pedido;
+import com.example.kebab4you.modelo.Producto;
 
 import java.util.List;
 

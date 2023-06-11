@@ -1,4 +1,4 @@
-package com.example.pruebavolley;
+package com.example.kebab4you;
 
 import android.os.Bundle;
 
@@ -7,15 +7,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.ui.AppBarConfiguration;
 
-import com.example.pruebavolley.databinding.ActivityMainBinding;
-import com.example.pruebavolley.databinding.ContentMainBinding;
-import com.example.pruebavolley.modelo.PedidoEnProceso;
-import com.example.pruebavolley.modelo.Producto;
-import com.example.pruebavolley.vista.adaptadores.AdaptadorSwipeTabs;
-import com.example.pruebavolley.vista.fragmentos.BebidasFragment;
-import com.example.pruebavolley.vista.fragmentos.MenusFragment;
-import com.example.pruebavolley.vista.fragmentos.PlatosFragment;
-import com.example.pruebavolley.vistamodelo.ViewModel;
+import com.example.kebab4You.R;
+import com.example.kebab4You.databinding.ActivityMainBinding;
+import com.example.kebab4You.databinding.ContentMainBinding;
+import com.example.kebab4you.modelo.PedidoEnProceso;
+import com.example.kebab4you.modelo.Producto;
+import com.example.kebab4you.vista.adaptadores.AdaptadorSwipeTabs;
+import com.example.kebab4you.vista.fragmentos.BebidasFragment;
+import com.example.kebab4you.vista.fragmentos.MenusFragment;
+import com.example.kebab4you.vista.fragmentos.PlatosFragment;
+import com.example.kebab4you.vistamodelo.ViewModel;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements BebidasFragment.t
         vistaModeloPedido = new ViewModelProvider(this).get(ViewModel.class);
         //Asignamos el id de la mesa
         vistaModeloPedido.setMesaId(getIntent().getIntExtra("id_mesa",0));
-        setSupportActionBar(binding.toolbar);
+        //setSupportActionBar(binding.toolbar);
 
         PedidoEnProceso.limpiarPedido(getIntent().getIntExtra("id_mesa",0));
         //INIST
@@ -81,11 +82,6 @@ public class MainActivity extends AppCompatActivity implements BebidasFragment.t
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }

@@ -1,4 +1,4 @@
-package com.example.pruebavolley.vista.fragmentos;
+package com.example.kebab4you.vista.fragmentos;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,40 +13,42 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.pruebavolley.PedidoActivity;
-import com.example.pruebavolley.R;
-import com.example.pruebavolley.databinding.FragmentTab2Binding;
-import com.example.pruebavolley.modelo.Producto;
-import com.example.pruebavolley.vista.adaptadores.ProductoAdaptador;
+import com.example.kebab4You.R;
+import com.example.kebab4You.databinding.FragmentTab3Binding;
+import com.example.kebab4you.PedidoActivity;
+import com.example.kebab4you.modelo.Producto;
+import com.example.kebab4you.vista.adaptadores.ProductoAdaptador;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MenusFragment extends Fragment {
+public class PlatosFragment extends Fragment {
 
-    private FragmentTab2Binding binding;
-    private MenuFragInterface mCallback;
+    private FragmentTab3Binding binding;
+    private PlatosFragInterface mCallback;
     private int mPos;
     private ProductoAdaptador adaptadorProductos;
     private List<Producto> listaProductos;
 
-    public interface MenuFragInterface {
-        List<Producto> cargarMenus();
+    public interface PlatosFragInterface {
+        List<Producto> cargarPlatos();
     }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof PlatosFragInterface) {
+            mCallback = (PlatosFragInterface) context;
+        } else {
+            throw new RuntimeException(context + " must implement Tab3FragInterface");
+        }
+    }
+
     @Override
     public void onResume() {
         super.onResume();
         adaptadorProductos.setReiniciarCantidades(1);
         adaptadorProductos.notifyDataSetChanged();
-    }
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        if (context instanceof MenuFragInterface) {
-            mCallback = (MenuFragInterface) context;
-        } else {
-            throw new RuntimeException(context + " must implement Tab2FragInterface");
-        }
     }
 
     @Override
@@ -59,7 +61,7 @@ public class MenusFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentTab2Binding.inflate(inflater, container, false);
+        binding = FragmentTab3Binding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
@@ -68,23 +70,20 @@ public class MenusFragment extends Fragment {
         // Inits
         listaProductos = new ArrayList<>();
         adaptadorProductos = new ProductoAdaptador(listaProductos);
-        binding.rcMenus.setLayoutManager(new LinearLayoutManager(getContext()));
-        binding.rcMenus.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
-        binding.rcMenus.setHasFixedSize(true);
-        binding.rcMenus.setAdapter(adaptadorProductos);
+        binding.rcPlatos.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.rcPlatos.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+        binding.rcPlatos.setHasFixedSize(true);
+        binding.rcPlatos.setAdapter(adaptadorProductos);
 
-        for (Producto p : mCallback.cargarMenus()) {
-            if (p.getCateg_id()[1].equals(getString(R.string.filtro_menu))) {
+        for (Producto p : mCallback.cargarPlatos()) {
+            if (p.getCateg_id()[1].equals(getString(R.string.filtro_platos))) {
                 listaProductos.add(p);
             }
         }
         adaptadorProductos.setListaProductos(listaProductos);
         adaptadorProductos.notifyDataSetChanged();
-
-
         // Listeners
         binding.btTerminarPedido.setOnClickListener(btTerminarPedidoOnClickListener);
-
     }
 
     @Override
@@ -92,7 +91,6 @@ public class MenusFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
-
 
     @Override
     public void onDestroy() {
